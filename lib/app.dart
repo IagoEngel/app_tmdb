@@ -1,15 +1,26 @@
+import 'package:app_tmdb/providers/configuracoes_provider.dart';
+import 'package:app_tmdb/providers/filmes_provider.dart';
+import 'package:app_tmdb/screens/tela%20inicial/tela_inicial_screen.dart';
+import 'package:app_tmdb/utils/app_tema.dart';
+import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AppBase extends StatelessWidget {
   const AppBase({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-      ),
-      home: Scaffold(
-        body: Container(),
+    DimensoesApp(MediaQuery.of(context));
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ConfiguracoesProvider()),
+        ChangeNotifierProvider(create: (_) => FilmesProvider()),
+      ],
+      child: MaterialApp(
+        theme: AppTema.theme,
+        home: const TelaInicial(),
       ),
     );
   }
