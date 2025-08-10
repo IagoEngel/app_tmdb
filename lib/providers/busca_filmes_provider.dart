@@ -23,6 +23,10 @@ class BuscaFilmesProvider extends ChangeNotifier {
         _listaFilmesBuscados = [];
       }
 
+      if (totalPages != null && page >= totalPages!) {
+        return;
+      }
+
       final response = await _filmeService.buscarFilmes(page, query);
       totalPages = response['total_pages'];
 
@@ -33,15 +37,16 @@ class BuscaFilmesProvider extends ChangeNotifier {
         _listaFilmesBuscados.add(item);
       }
     } catch (e) {
-      _setErro(e.toString());
+      _setErro('Erro ao buscar filmes => $e');
     } finally {
       _setCarregando(false);
     }
-
-    notifyListeners();
   }
 
-  void _setCarregando(bool valor) => carregando = valor;
+  void _setCarregando(bool valor) {
+    carregando = valor;
+    notifyListeners();
+  }
 
   void _setErro(String mensagem) {
     temErro = true;

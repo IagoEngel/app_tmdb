@@ -8,6 +8,7 @@ import 'package:app_tmdb/utils/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:app_tmdb/utils/widgets/custom_circular_progress_widget.dart';
 import 'package:app_tmdb/utils/widgets/custom_sized_box_widget.dart';
+import 'package:app_tmdb/utils/widgets/popup_erro_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -23,14 +24,12 @@ class _PesquisaScreenState extends State<PesquisaScreen> {
   late FilmesProvider _filmesProvider;
   late BuscaFilmesProvider _buscaFilmesProvider;
   late TextEditingController _controller;
-
-  final ScrollController _scrollController = ScrollController();
+  late ScrollController _scrollController;
 
   Map<int, String> generosFilme = {};
 
   int _page = 1;
   int _generoSelecionado = 0;
-  bool _carregando = false;
   bool _carregandoMaisFilmes = false;
   Timer? _debounce;
 
@@ -40,29 +39,10 @@ class _PesquisaScreenState extends State<PesquisaScreen> {
 
     _filmesProvider = Provider.of(context, listen: false);
     _buscaFilmesProvider = Provider.of(context, listen: false);
+    _scrollController = ScrollController();
+    _controller = TextEditingController();
 
     generosFilme = {0: 'Tudo', ..._filmesProvider.generosFilmes};
-
-    _controller = TextEditingController(text: 'vingadore');
-
-    _scrollController.addListener(() async {
-      if (!_scrollController.position.atEdge) return;
-
-      bool chegouAoFim = _scrollController.position.pixels > 0;
-      if (!chegouAoFim && !_carregandoMaisFilmes) return;
-
-      setState(() => _carregandoMaisFilmes = true);
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: Durations.medium1,
-          curve: Curves.linear,
-        );
-      });
-
-      await _buscaFilmesProvider.buscarFilmes(++_page, _controller.text.trim());
-      setState(() => _carregandoMaisFilmes = false);
-    });
   }
 
   @override
@@ -113,70 +93,112 @@ class _PesquisaScreenState extends State<PesquisaScreen> {
         ),
         const CustomSizedBoxWidget(height: 22.5),
         Consumer<BuscaFilmesProvider>(
-          builder: (_, buscaFilmesProvider, __) {
-            if (_carregando) {
-              return const Expanded(
-                child: CustomCircularProgressWidget(),
-              );
-            }
-
-            return Expanded(
-              child: ListView.separated(
-                controller: _scrollController,
-                itemCount: buscaFilmesProvider.listaFilmesBuscados.length,
-                separatorBuilder: (_, i) =>
-                    const CustomSizedBoxWidget(height: 10),
-                itemBuilder: (_, i) {
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      FilmeListTileWidget(
-                        filme: buscaFilmesProvider.listaFilmesBuscados[i],
-                      ),
-                      Visibility(
-                        visible: _carregandoMaisFilmes &&
-                            i ==
-                                buscaFilmesProvider.listaFilmesBuscados.length -
-                                    1,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            top: DimensoesApp.larguraProporcional(22.5),
-                          ),
-                          child: const CustomCircularProgressWidget(
-                            texto: 'Carregando mais filmes...',
-                          ),
-                        ),
-                      ),
-                      Visibility(
-                        visible: i == _filmesProvider.listaFilmes.length - 1,
-                        child: const CustomSizedBoxWidget(height: 22.5),
-                      ),
-                    ],
-                  );
-                },
-              ),
-            );
-          },
+          builder: (_, buscaFilmesProvider, __) =>
+              _renderizarConteudoPesquisa(buscaFilmesProvider),
         ),
       ],
+    );
+  }
+
+  Widget _renderizarConteudoPesquisa(BuscaFilmesProvider buscaFilmesProvider) {
+    if (buscaFilmesProvider.carregando && !_carregandoMaisFilmes) {
+      return const CustomCircularProgressWidget();
+    }
+
+    if (buscaFilmesProvider.temErro) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
+            context: context,
+            builder: (context) =>
+                PopupErroWidget(mensagem: buscaFilmesProvider.mensagemErro),
+          ));
+    }
+
+    if (buscaFilmesProvider.totalPages != null &&
+        _page >= buscaFilmesProvider.totalPages!) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
+            context: context,
+            builder: (context) => const PopupErroWidget(
+              titulo: 'Aviso',
+              mensagem: 'Não há mais filmes para carregar',
+            ),
+          ));
+    }
+
+    return NotificationListener<ScrollNotification>(
+      onNotification: onNotification,
+      child: Expanded(
+        child: ListView.separated(
+          shrinkWrap: true,
+          controller: _scrollController,
+          physics: const AlwaysScrollableScrollPhysics(),
+          itemCount: buscaFilmesProvider.listaFilmesBuscados.length,
+          separatorBuilder: (_, i) => const CustomSizedBoxWidget(height: 10),
+          itemBuilder: (_, i) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FilmeListTileWidget(
+                filme: buscaFilmesProvider.listaFilmesBuscados[i],
+              ),
+              Visibility(
+                visible: _carregandoMaisFilmes &&
+                    i == buscaFilmesProvider.listaFilmesBuscados.length - 1,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: DimensoesApp.larguraProporcional(22.5),
+                  ),
+                  child: const CustomCircularProgressWidget(
+                    texto: 'Carregando mais filmes...',
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: i == _filmesProvider.listaFilmes.length - 1,
+                child: const CustomSizedBoxWidget(height: 22.5),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
   void _onChanged(String value) {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
 
-    setState(() {
-      _carregando = true;
-      _page = 1;
-    });
+    setState(() => _page = 1);
 
-    _debounce = Timer(const Duration(milliseconds: 700), () async {
-      await _buscaFilmesProvider.buscarFilmes(
-        1,
-        value.trim(),
-        generoId: (generosFilme.entries.toList())[_generoSelecionado].key,
-      );
-      setState(() => _carregando = false);
-    });
+    _debounce = Timer(
+        const Duration(milliseconds: 1000),
+        () async => await _buscaFilmesProvider.buscarFilmes(
+              1,
+              value.trim(),
+              generoId: (generosFilme.entries.toList())[_generoSelecionado].key,
+            ));
+  }
+
+  bool onNotification(ScrollNotification notification) {
+    if (!notification.metrics.atEdge) return false;
+
+    if (notification is ScrollEndNotification && !_carregandoMaisFilmes) {
+      setState(() => _carregandoMaisFilmes = true);
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: Durations.medium1,
+          curve: Curves.linear,
+        );
+      });
+
+      _buscaFilmesProvider
+          .buscarFilmes(
+            ++_page,
+            _controller.text.trim(),
+            generoId: (generosFilme.entries.toList())[_generoSelecionado].key,
+          )
+          .then((_) => setState(() => _carregandoMaisFilmes = false));
+    }
+
+    return false;
   }
 }

@@ -96,7 +96,9 @@ class _DetalhesFilmeScreenState extends State<DetalhesFilmeScreen> {
                       style: const TextStyle(fontWeight: FontWeight.bold),
                       children: [
                         TextSpan(
-                          text: _filme.overview,
+                          text: _filme.overview.isNotEmpty
+                              ? _filme.overview
+                              : 'Descrição não encontrada',
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontWeight: FontWeight.normal,
