@@ -1,6 +1,6 @@
 import 'package:app_tmdb/models/filme_model.dart';
 import 'package:app_tmdb/providers/filmes_provider.dart';
-import 'package:app_tmdb/screens/tela%20inicial/widgets/poster_filme_widget.dart';
+import 'package:app_tmdb/screens/home/widgets/poster_filme_widget.dart';
 import 'package:app_tmdb/utils/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:app_tmdb/utils/widgets/custom_sized_box_widget.dart';

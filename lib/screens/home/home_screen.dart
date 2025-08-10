@@ -1,6 +1,6 @@
 import 'package:app_tmdb/providers/configuracoes_provider.dart';
 import 'package:app_tmdb/providers/filmes_provider.dart';
-import 'package:app_tmdb/screens/tela%20inicial/widgets/filme_card_widget.dart';
+import 'package:app_tmdb/screens/home/widgets/filme_card_widget.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:app_tmdb/utils/widgets/custom_circular_progress_widget.dart';
 import 'package:app_tmdb/utils/widgets/custom_sized_box_widget.dart';

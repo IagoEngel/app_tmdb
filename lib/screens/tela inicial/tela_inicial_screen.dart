@@ -1,5 +1,5 @@
-import 'package:app_tmdb/screens/tela%20inicial/home_screen.dart';
-import 'package:app_tmdb/screens/tela%20inicial/teste_screen.dart';
+import 'package:app_tmdb/screens/home/home_screen.dart';
+import 'package:app_tmdb/screens/pesquisa/pesquisa_screen.dart';
 import 'package:app_tmdb/utils/widgets/floating_navigation_bar_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class TelaInicial extends StatefulWidget {
 class _TelaInicialState extends State<TelaInicial> {
   final List<Widget> _listaTelas = [
     const HomeScreen(),
-    const TesteScreen(),
+    const PesquisaScreen(),
   ];
 
   int selectedIndex = 0;
