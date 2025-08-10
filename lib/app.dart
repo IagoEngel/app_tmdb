@@ -24,9 +24,14 @@ class AppBase extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => FilmesSimilaresProvider()),
         ChangeNotifierProvider(create: (_) => RecomendacoesProvider()),
       ],
-      child: MaterialApp(
-        theme: AppTema.theme,
-        home: const TelaInicial(),
+      child: Consumer<ConfiguracoesProvider>(
+        child: const TelaInicial(),
+        builder: (_, configuracoes, child) => MaterialApp(
+          theme: configuracoes.temaClaro
+              ? AppTema.temaBaseClaro()
+              : AppTema.temaBaseEscuro(),
+          home: child,
+        ),
       ),
     );
   }

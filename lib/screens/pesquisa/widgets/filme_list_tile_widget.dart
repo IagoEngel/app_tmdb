@@ -39,7 +39,7 @@ class FilmeListTileWidget extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
         ),
-        shape: const UnderlineInputBorder(
+        shape: UnderlineInputBorder(
           borderSide: BorderSide(color: AppTema.cinza),
         ),
       ),

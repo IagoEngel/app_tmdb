@@ -30,7 +30,7 @@ class ListaGenerosFilmesWidget extends StatelessWidget {
           onTap: () => onPressed(i),
           child: Chip(
             backgroundColor:
-                generoSelecionado == i ? AppTema.azul : AppTema.cinza,
+                generoSelecionado == i ? AppTema.destaque : AppTema.cinza,
             label: Text(lista[i]),
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:app_tmdb/providers/configuracoes_provider.dart';
 import 'package:app_tmdb/providers/filmes_provider.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/detalhes_filme_screen.dart';
 import 'package:app_tmdb/screens/home/widgets/filme_card_widget.dart';
+import 'package:app_tmdb/utils/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:app_tmdb/utils/widgets/custom_circular_progress_widget.dart';
 import 'package:app_tmdb/utils/widgets/custom_sized_box_widget.dart';
@@ -73,12 +74,27 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: DimensoesApp.larguraProporcional(10),
+            padding: EdgeInsets.only(
+              bottom: DimensoesApp.larguraProporcional(10),
             ),
-            child: Text(
-              'Filmes Populares',
-              style: Theme.of(context).textTheme.titleLarge,
+            child: Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Text(
+                  'Filmes Populares',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                IconButton(
+                  onPressed: () {
+                    ConfiguracoesProvider configuracoesProvider = Provider.of(context, listen: false);
+                    configuracoesProvider.setTema();
+                  },
+                  visualDensity: VisualDensity.compact,
+                  padding: EdgeInsets.zero,
+                  icon: Icon(Icons.contrast, color: AppTema.corIcone),
+                ),
+              ],
             ),
           ),
           const CustomSizedBoxWidget(height: 16),

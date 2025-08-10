@@ -16,11 +16,11 @@ class CustomCircularProgressWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const CircularProgressIndicator(color: AppTema.azul),
+          CircularProgressIndicator(color: AppTema.destaque),
           const CustomSizedBoxWidget(height: 4),
           Text(
             texto,
-            style: const TextStyle(color: Colors.white),
+            style: TextStyle(color: AppTema.corIcone),
           ),
         ],
       ),

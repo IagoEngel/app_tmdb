@@ -84,7 +84,7 @@ class _ShimmerImagemWidgetState extends State<ShimmerImagemWidget> {
           children: [
             Icon(
               Icons.person,
-              color: Colors.white,
+              color: AppTema.corIcone,
               size: DimensoesApp.larguraProporcional(40),
             ),
             Text(

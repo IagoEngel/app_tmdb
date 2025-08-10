@@ -3,6 +3,7 @@ import 'package:app_tmdb/providers/filmes_provider.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/widgets/elenco_filme_widget.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/widgets/filmes_similares_widget.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/widgets/recomendacoes_widget.dart';
+import 'package:app_tmdb/utils/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:app_tmdb/utils/widgets/custom_circular_progress_widget.dart';
 import 'package:app_tmdb/utils/widgets/custom_sized_box_widget.dart';
@@ -68,9 +69,23 @@ class _DetalhesFilmeScreenState extends State<DetalhesFilmeScreen> {
           backgroundColor: Colors.transparent,
           expandedHeight: DimensoesApp.larguraProporcional(160),
           flexibleSpace: FlexibleSpaceBar(
-            title: Text(
-              _filme.title,
-              style: Theme.of(context).textTheme.titleSmall,
+            title: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  padding: EdgeInsets.zero,
+                  visualDensity: const VisualDensity(horizontal: -3, vertical: -3),
+                  icon: const Icon(Icons.arrow_back_ios),
+                  iconSize: DimensoesApp.larguraProporcional(12),
+                  color: AppTema.corIcone,
+                ),
+                Text(
+                  _filme.title,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ],
             ),
             background: ShimmerImagemWidget(
               imagePath: _filme.backdropPath,
