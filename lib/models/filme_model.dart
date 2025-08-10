@@ -1,3 +1,5 @@
+import 'package:app_tmdb/models/membro_elenco_model.dart';
+
 class FilmeModel {
   final bool adult;
   final String backdropPath;
@@ -13,20 +15,24 @@ class FilmeModel {
   final bool video;
   final num voteAverage;
   final int voteCount;
+  List<MembroElencoModel> cast;
+  List<MembroElencoModel> crew;
 
   FilmeModel.fromJson(Map<String, dynamic> json)
-      : adult = json['adult'],
-        backdropPath = json['backdrop_path'],
-        genreIds = List.from(json['genre_ids']),
-        id = json['id'],
-        originalLanguage = json['original_language'],
-        originalTitle = json['original_title'],
-        overview = json['overview'],
-        popularity = json['popularity'],
-        posterPath = json['poster_path'],
-        releaseDate = json['release_date'],
-        title = json['title'],
-        video = json['video'],
-        voteAverage = json['vote_average'],
-        voteCount = json['vote_count'];
+      : adult = json['adult'] ?? false,
+        backdropPath = json['backdrop_path'] ?? '',
+        genreIds = List.from(json['genre_ids'] ?? []),
+        id = json['id'] ?? 0,
+        originalLanguage = json['original_language'] ?? '',
+        originalTitle = json['original_title'] ?? '',
+        overview = json['overview'] ?? '',
+        popularity = json['popularity'] ?? 0,
+        posterPath = json['poster_path'] ?? '',
+        releaseDate = json['release_date'] ?? '',
+        title = json['title'] ?? '',
+        video = json['video'] ?? false,
+        voteAverage = json['vote_average'] ?? 0,
+        voteCount = json['vote_count'] ?? 0,
+        cast = List.from(json['cast'] ?? []),
+        crew = List.from(json['crew'] ?? []);
 }

@@ -5,25 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
-class PosterFilmeWidget extends StatefulWidget {
-  final String posterPath;
+class ShimmerImagemWidget extends StatefulWidget {
+  final String imagePath;
   final double width;
   final double height;
   final double radius;
+  final String tipoImagem;
 
-  const PosterFilmeWidget({
+  const ShimmerImagemWidget({
     super.key,
-    required this.posterPath,
+    required this.imagePath,
     this.width = 50,
     this.height = 56,
     this.radius = 8,
+    this.tipoImagem = 'poster',
   });
 
   @override
-  State<PosterFilmeWidget> createState() => _PosterFilmeWidgetState();
+  State<ShimmerImagemWidget> createState() => _ShimmerImagemWidgetState();
 }
 
-class _PosterFilmeWidgetState extends State<PosterFilmeWidget> {
+class _ShimmerImagemWidgetState extends State<ShimmerImagemWidget> {
   late ConfiguracoesProvider _configuracoesProvider;
 
   bool _carregandoImagem = true;
@@ -36,12 +38,17 @@ class _PosterFilmeWidgetState extends State<PosterFilmeWidget> {
     _configuracoesProvider = Provider.of(context, listen: false);
 
     final baseUrl = _configuracoesProvider.configuracoes!.images.baseUrl;
-    final posterSize =
-        _configuracoesProvider.configuracoes!.images.posterSizes[0];
-    fullPath = baseUrl + posterSize + widget.posterPath;
+    final posterSize = (widget.tipoImagem == 'poster'
+        ? _configuracoesProvider.configuracoes!.images.posterSizes[0]
+        : widget.tipoImagem == 'profile'
+            ? _configuracoesProvider.configuracoes!.images.profileSizes[1]
+            : _configuracoesProvider.configuracoes!.images.backdropSizes[1]);
+    fullPath = baseUrl + posterSize + widget.imagePath;
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await precacheImage(NetworkImage(fullPath), context);
+      if (widget.imagePath.isNotEmpty) {
+        await precacheImage(NetworkImage(fullPath), context);
+      }
 
       setState(() => _carregandoImagem = false);
     });
@@ -64,6 +71,27 @@ class _PosterFilmeWidgetState extends State<PosterFilmeWidget> {
             color: AppTema.cinza,
             borderRadius: BorderRadius.circular(radius),
           ),
+        ),
+      );
+    }
+
+    if (widget.imagePath.isEmpty) {
+      return SizedBox(
+        width: width,
+        height: height,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.person,
+              color: Colors.white,
+              size: DimensoesApp.larguraProporcional(40),
+            ),
+            Text(
+              'Não há imagem',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ],
         ),
       );
     }

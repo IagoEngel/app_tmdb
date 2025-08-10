@@ -44,4 +44,44 @@ class FilmeService {
       rethrow;
     }
   }
+
+  Future getDetalhesFilmes(int movieId) async {
+    try {
+      final response = await _dio.get('/movie/$movieId');
+
+      return response.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future getElenco(int movieId) async {
+    try {
+      final response = await _dio.get('/movie/$movieId/credits');
+
+      return response.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future getFilmesSimilares(int movieId) async {
+    try {
+      final response = await _dio.get('/movie/$movieId/similar');
+
+      return response.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future getRecomendacoes(int movieId) async {
+    try {
+      final response = await _dio.get('/movie/$movieId/recommendations');
+
+      return response.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:app_tmdb/models/filme_model.dart';
+import 'package:app_tmdb/models/membro_elenco_model.dart';
 import 'package:app_tmdb/services/filme_service.dart';
 import 'package:flutter/material.dart';
 
@@ -60,6 +61,35 @@ class FilmesProvider extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  Future getDetalhesFilmes(int movieId) async {
+    try {
+      final response = await _filmeService.getDetalhesFilmes(movieId);
+
+      return FilmeModel.fromJson(response);
+    } catch (e) {
+      _setErro(e.toString());
+      rethrow;
+    }
+  }
+
+  Future<({List<MembroElencoModel> cast, List<MembroElencoModel> crew})>
+      getElenco(int movieId) async {
+    try {
+      final response = await _filmeService.getElenco(movieId);
+
+      final cast = List.from(response['cast'])
+          .map((item) => MembroElencoModel.fromJson(item))
+          .toList();
+      final crew = List.from(response['crew'])
+          .map((item) => MembroElencoModel.fromJson(item))
+          .toList();
+
+      return (cast: cast, crew: crew);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   void _setCarregando(bool valor) => carregando = valor;

@@ -1,5 +1,5 @@
 import 'package:app_tmdb/models/filme_model.dart';
-import 'package:app_tmdb/screens/home/widgets/poster_filme_widget.dart';
+import 'package:app_tmdb/utils/widgets/shimmer_imagem_widget.dart';
 import 'package:app_tmdb/utils/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +18,8 @@ class FilmeListTileWidget extends StatelessWidget {
 
     return ListTile(
       contentPadding: EdgeInsets.fromLTRB(0, 0, 0, tamanho8),
-      leading: PosterFilmeWidget(
-        posterPath: filme.posterPath,
+      leading: ShimmerImagemWidget(
+        imagePath: filme.posterPath,
         width: 32,
         height: 32,
         radius: 6,

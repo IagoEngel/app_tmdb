@@ -46,7 +46,6 @@ class _PesquisaScreenState extends State<PesquisaScreen> {
     _controller = TextEditingController(text: 'vingadore');
 
     _scrollController.addListener(() async {
-      print(_scrollController.position);
       if (!_scrollController.position.atEdge) return;
 
       bool chegouAoFim = _scrollController.position.pixels > 0;

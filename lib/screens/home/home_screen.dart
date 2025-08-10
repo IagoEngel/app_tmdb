@@ -1,5 +1,6 @@
 import 'package:app_tmdb/providers/configuracoes_provider.dart';
 import 'package:app_tmdb/providers/filmes_provider.dart';
+import 'package:app_tmdb/screens/detalhes%20filme/detalhes_filme_screen.dart';
 import 'package:app_tmdb/screens/home/widgets/filme_card_widget.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:app_tmdb/utils/widgets/custom_circular_progress_widget.dart';
@@ -59,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
       });
 
       await _filmesProvider.getFilmesPopulares(++_page);
-
       setState(() => _carregandoMaisFilmes = false);
     });
   }
@@ -112,27 +112,35 @@ class _HomeScreenState extends State<HomeScreen> {
         controller: _scrollController,
         itemCount: _filmesProvider.listaFilmes.length,
         separatorBuilder: (_, __) => const CustomSizedBoxWidget(height: 12),
-        itemBuilder: (_, i) => Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            FilmeCardWidget(filme: _filmesProvider.listaFilmes[i]),
-            Visibility(
-              visible: _carregandoMaisFilmes &&
-                  i == _filmesProvider.listaFilmes.length - 1,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  top: DimensoesApp.larguraProporcional(24),
-                ),
-                child: const CustomCircularProgressWidget(
-                  texto: 'Carregando mais filmes...',
+        itemBuilder: (_, i) => GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => DetalhesFilmeScreen(
+                    movieId: _filmesProvider.listaFilmes[i].id)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FilmeCardWidget(filme: _filmesProvider.listaFilmes[i]),
+              Visibility(
+                visible: _carregandoMaisFilmes &&
+                    i == _filmesProvider.listaFilmes.length - 1,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: DimensoesApp.larguraProporcional(24),
+                  ),
+                  child: const CustomCircularProgressWidget(
+                    texto: 'Carregando mais filmes...',
+                  ),
                 ),
               ),
-            ),
-            Visibility(
-              visible: i == _filmesProvider.listaFilmes.length - 1,
-              child: const CustomSizedBoxWidget(height: 24),
-            ),
-          ],
+              Visibility(
+                visible: i == _filmesProvider.listaFilmes.length - 1,
+                child: const CustomSizedBoxWidget(height: 24),
+              ),
+            ],
+          ),
         ),
       ),
     );
