@@ -7,10 +7,16 @@ import 'package:shimmer/shimmer.dart';
 
 class PosterFilmeWidget extends StatefulWidget {
   final String posterPath;
+  final double width;
+  final double height;
+  final double radius;
 
   const PosterFilmeWidget({
     super.key,
     required this.posterPath,
+    this.width = 50,
+    this.height = 56,
+    this.radius = 8,
   });
 
   @override
@@ -19,9 +25,6 @@ class PosterFilmeWidget extends StatefulWidget {
 
 class _PosterFilmeWidgetState extends State<PosterFilmeWidget> {
   late ConfiguracoesProvider _configuracoesProvider;
-
-  final double _tamanho50 = DimensoesApp.larguraProporcional(50);
-  final double _tamanho56 = DimensoesApp.larguraProporcional(56);
 
   bool _carregandoImagem = true;
   String fullPath = '';
@@ -46,22 +49,35 @@ class _PosterFilmeWidgetState extends State<PosterFilmeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final double width = DimensoesApp.larguraProporcional(widget.width);
+    final double height = DimensoesApp.larguraProporcional(widget.height);
+    final double radius = DimensoesApp.larguraProporcional(widget.radius);
+
     if (_carregandoImagem) {
       return Shimmer.fromColors(
         baseColor: AppTema.cinzaClaro.withAlpha(100),
         highlightColor: AppTema.cinzaClaro.withAlpha(200),
         child: Container(
-          width: _tamanho50,
-          height: _tamanho56,
-          color: AppTema.cinza,
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            color: AppTema.cinza,
+            borderRadius: BorderRadius.circular(radius),
+          ),
         ),
       );
     }
 
     return SizedBox(
-      width: _tamanho50,
-      height: _tamanho56,
-      child: Image.network(fullPath),
+      width: width,
+      height: height,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(radius),
+        child: Image.network(
+          fullPath,
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }

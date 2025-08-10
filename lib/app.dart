@@ -1,3 +1,4 @@
+import 'package:app_tmdb/providers/busca_filmes_provider.dart';
 import 'package:app_tmdb/providers/configuracoes_provider.dart';
 import 'package:app_tmdb/providers/filmes_provider.dart';
 import 'package:app_tmdb/screens/tela%20inicial/tela_inicial_screen.dart';
@@ -17,6 +18,7 @@ class AppBase extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => ConfiguracoesProvider()),
         ChangeNotifierProvider(create: (_) => FilmesProvider()),
+        ChangeNotifierProvider(create: (_) => BuscaFilmesProvider()),
       ],
       child: MaterialApp(
         theme: AppTema.theme,

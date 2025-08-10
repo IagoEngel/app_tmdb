@@ -98,7 +98,7 @@ class _FilmeCardWidgetState extends State<FilmeCardWidget> {
       height: _tamanho40,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Colors.red,
+        color: AppTema.azul,
         borderRadius: BorderRadius.circular(_tamanho10),
       ),
       child: Text(

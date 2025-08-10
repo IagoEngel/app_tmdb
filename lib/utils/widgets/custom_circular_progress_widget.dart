@@ -1,3 +1,4 @@
+import 'package:app_tmdb/utils/app_tema.dart';
 import 'package:app_tmdb/utils/widgets/custom_sized_box_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class CustomCircularProgressWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const CircularProgressIndicator(),
+          const CircularProgressIndicator(color: AppTema.azul),
           const CustomSizedBoxWidget(height: 4),
           Text(
             texto,

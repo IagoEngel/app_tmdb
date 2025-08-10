@@ -19,8 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late FilmesProvider _filmesProvider;
 
   final ScrollController _scrollController = ScrollController();
-  final double _tamanho16 = DimensoesApp.larguraProporcional(16);
-  final double _tamanho24 = DimensoesApp.larguraProporcional(24);
 
   bool _carregando = true;
   bool _carregandoMaisFilmes = false;
@@ -70,25 +68,22 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: onRefresh,
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(_tamanho16, _tamanho24, _tamanho16, 0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: DimensoesApp.larguraProporcional(10),
-              ),
-              child: Text(
-                'Filmes Populares',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: DimensoesApp.larguraProporcional(10),
             ),
-            const CustomSizedBoxWidget(height: 16),
-            _renderizarListaFilmes(),
-          ],
-        ),
+            child: Text(
+              'Filmes Populares',
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+          ),
+          const CustomSizedBoxWidget(height: 16),
+          _renderizarListaFilmes(),
+        ],
       ),
     );
   }
@@ -125,7 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
               visible: _carregandoMaisFilmes &&
                   i == _filmesProvider.listaFilmes.length - 1,
               child: Padding(
-                padding: EdgeInsets.only(top: _tamanho24),
+                padding: EdgeInsets.only(
+                  top: DimensoesApp.larguraProporcional(24),
+                ),
                 child: const CustomCircularProgressWidget(
                   texto: 'Carregando mais filmes...',
                 ),
