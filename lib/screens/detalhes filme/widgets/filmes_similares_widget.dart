@@ -1,8 +1,8 @@
 import 'package:app_tmdb/providers/filmes_similares_provider.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/widgets/info_card_widget.dart';
-import 'package:app_tmdb/utils/widgets/custom_circular_progress_widget.dart';
-import 'package:app_tmdb/utils/widgets/custom_sized_box_widget.dart';
-import 'package:app_tmdb/utils/widgets/popup_erro_widget.dart';
+import 'package:app_tmdb/ui/core/widgets/custom_circular_progress_widget.dart';
+import 'package:app_tmdb/ui/core/widgets/custom_sized_box_widget.dart';
+import 'package:app_tmdb/ui/core/widgets/popup_erro_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,5 +1,5 @@
-import 'package:app_tmdb/models/filme_model.dart';
-import 'package:app_tmdb/models/membro_elenco_model.dart';
+import 'package:app_tmdb/domain/models/filme_model.dart';
+import 'package:app_tmdb/domain/models/membro_elenco_model.dart';
 import 'package:app_tmdb/repository/filme_repository.dart';
 import 'package:flutter/material.dart';
 

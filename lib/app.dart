@@ -4,7 +4,7 @@ import 'package:app_tmdb/providers/filmes_provider.dart';
 import 'package:app_tmdb/providers/filmes_similares_provider.dart';
 import 'package:app_tmdb/providers/recomendacoes_provider.dart';
 import 'package:app_tmdb/screens/tela%20inicial/tela_inicial_screen.dart';
-import 'package:app_tmdb/utils/app_tema.dart';
+import 'package:app_tmdb/ui/core/themes/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

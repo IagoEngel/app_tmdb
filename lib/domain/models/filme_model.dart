@@ -1,4 +1,4 @@
-import 'package:app_tmdb/models/membro_elenco_model.dart';
+import 'package:app_tmdb/domain/models/membro_elenco_model.dart';
 
 class FilmeModel {
   final bool adult;

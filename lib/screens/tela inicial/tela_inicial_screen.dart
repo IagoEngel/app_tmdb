@@ -1,7 +1,7 @@
 import 'package:app_tmdb/screens/home/home_screen.dart';
 import 'package:app_tmdb/screens/pesquisa/pesquisa_screen.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
-import 'package:app_tmdb/utils/widgets/floating_navigation_bar_widget.dart';
+import 'package:app_tmdb/ui/core/widgets/floating_navigation_bar_widget.dart';
 import 'package:flutter/material.dart';
 
 class TelaInicial extends StatefulWidget {

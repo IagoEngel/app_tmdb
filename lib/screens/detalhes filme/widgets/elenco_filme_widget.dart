@@ -1,6 +1,6 @@
-import 'package:app_tmdb/models/membro_elenco_model.dart';
+import 'package:app_tmdb/domain/models/membro_elenco_model.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/widgets/info_card_widget.dart';
-import 'package:app_tmdb/utils/widgets/custom_sized_box_widget.dart';
+import 'package:app_tmdb/ui/core/widgets/custom_sized_box_widget.dart';
 import 'package:flutter/material.dart';
 
 class ElencoFilmeWidget extends StatelessWidget {

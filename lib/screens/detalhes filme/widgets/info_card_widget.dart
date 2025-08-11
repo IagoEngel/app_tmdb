@@ -1,5 +1,5 @@
-import 'package:app_tmdb/utils/widgets/custom_sized_box_widget.dart';
-import 'package:app_tmdb/utils/widgets/shimmer_imagem_widget.dart';
+import 'package:app_tmdb/ui/core/widgets/custom_sized_box_widget.dart';
+import 'package:app_tmdb/ui/core/widgets/shimmer_imagem_widget.dart';
 import 'package:flutter/material.dart';
 
 class InfoCardWidget extends StatelessWidget {

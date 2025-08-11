@@ -1,4 +1,4 @@
-import 'package:app_tmdb/models/configuracoes_model.dart';
+import 'package:app_tmdb/domain/models/configuracoes_model.dart';
 import 'package:app_tmdb/repository/configuracoes_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

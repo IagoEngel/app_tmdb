@@ -1,5 +1,5 @@
 import 'package:app_tmdb/providers/configuracoes_provider.dart';
-import 'package:app_tmdb/utils/app_tema.dart';
+import 'package:app_tmdb/ui/core/themes/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

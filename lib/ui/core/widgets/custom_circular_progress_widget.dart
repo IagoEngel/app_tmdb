@@ -1,5 +1,5 @@
-import 'package:app_tmdb/utils/app_tema.dart';
-import 'package:app_tmdb/utils/widgets/custom_sized_box_widget.dart';
+import 'package:app_tmdb/ui/core/themes/app_tema.dart';
+import 'package:app_tmdb/ui/core/widgets/custom_sized_box_widget.dart';
 import 'package:flutter/material.dart';
 
 class CustomCircularProgressWidget extends StatelessWidget {

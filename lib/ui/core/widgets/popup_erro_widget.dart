@@ -1,4 +1,4 @@
-import 'package:app_tmdb/utils/app_tema.dart';
+import 'package:app_tmdb/ui/core/themes/app_tema.dart';
 import 'package:flutter/material.dart';
 
 class PopupErroWidget extends StatelessWidget {

@@ -1,7 +1,7 @@
-import 'package:app_tmdb/models/filme_model.dart';
+import 'package:app_tmdb/domain/models/filme_model.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/detalhes_filme_screen.dart';
-import 'package:app_tmdb/utils/widgets/shimmer_imagem_widget.dart';
-import 'package:app_tmdb/utils/app_tema.dart';
+import 'package:app_tmdb/ui/core/widgets/shimmer_imagem_widget.dart';
+import 'package:app_tmdb/ui/core/themes/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:flutter/material.dart';
 

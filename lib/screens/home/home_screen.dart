@@ -2,11 +2,11 @@ import 'package:app_tmdb/providers/configuracoes_provider.dart';
 import 'package:app_tmdb/providers/filmes_provider.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/detalhes_filme_screen.dart';
 import 'package:app_tmdb/screens/home/widgets/filme_card_widget.dart';
-import 'package:app_tmdb/utils/app_tema.dart';
+import 'package:app_tmdb/ui/core/themes/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
-import 'package:app_tmdb/utils/widgets/custom_circular_progress_widget.dart';
-import 'package:app_tmdb/utils/widgets/custom_sized_box_widget.dart';
-import 'package:app_tmdb/utils/widgets/popup_erro_widget.dart';
+import 'package:app_tmdb/ui/core/widgets/custom_circular_progress_widget.dart';
+import 'package:app_tmdb/ui/core/widgets/custom_sized_box_widget.dart';
+import 'package:app_tmdb/ui/core/widgets/popup_erro_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
