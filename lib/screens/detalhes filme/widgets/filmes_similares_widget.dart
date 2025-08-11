@@ -1,4 +1,4 @@
-import 'package:app_tmdb/providers/filmes_similares_provider.dart';
+import 'package:app_tmdb/view%20model/filmes_similares_view_model.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/widgets/info_card_widget.dart';
 import 'package:app_tmdb/ui/core/widgets/custom_circular_progress_widget.dart';
 import 'package:app_tmdb/ui/core/widgets/custom_sized_box_widget.dart';
@@ -21,7 +21,7 @@ class FilmesSimilaresWidget extends StatefulWidget {
 }
 
 class _FilmesSimilaresWidgetState extends State<FilmesSimilaresWidget> {
-  late FilmesSimilaresProvider _filmesSimilaresProvider;
+  late FilmesSimilaresViewModel _filmesSimilaresProvider;
 
   @override
   void initState() {
@@ -50,14 +50,14 @@ class _FilmesSimilaresWidgetState extends State<FilmesSimilaresWidget> {
           'Filmes similares: ',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
-        Consumer<FilmesSimilaresProvider>(
+        Consumer<FilmesSimilaresViewModel>(
           builder: (_, providerAux, __) => _renderizarConteudo(providerAux),
         ),
       ],
     );
   }
 
-  Widget _renderizarConteudo(FilmesSimilaresProvider providerAux) {
+  Widget _renderizarConteudo(FilmesSimilaresViewModel providerAux) {
     if (providerAux.carregando) {
       return const CustomCircularProgressWidget();
     }

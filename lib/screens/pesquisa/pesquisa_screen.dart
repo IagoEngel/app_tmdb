@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:app_tmdb/providers/busca_filmes_provider.dart';
-import 'package:app_tmdb/providers/filmes_provider.dart';
+import 'package:app_tmdb/view%20model/busca_filmes_view_model.dart';
+import 'package:app_tmdb/view%20model/filmes_provider_view_model.dart';
 import 'package:app_tmdb/screens/pesquisa/widgets/filme_list_tile_widget.dart';
 import 'package:app_tmdb/screens/pesquisa/widgets/lista_generos_filmes_widget.dart';
 import 'package:app_tmdb/ui/core/themes/app_tema.dart';
@@ -21,8 +21,8 @@ class PesquisaScreen extends StatefulWidget {
 }
 
 class _PesquisaScreenState extends State<PesquisaScreen> {
-  late FilmesProvider _filmesProvider;
-  late BuscaFilmesProvider _buscaFilmesProvider;
+  late FilmesViewModel _filmesProvider;
+  late BuscaFilmesViewModel _buscaFilmesProvider;
   late TextEditingController _controller;
   late ScrollController _scrollController;
 
@@ -92,7 +92,7 @@ class _PesquisaScreenState extends State<PesquisaScreen> {
           onPressed: (i) => setState(() => _generoSelecionado = i),
         ),
         const CustomSizedBoxWidget(height: 22.5),
-        Consumer<BuscaFilmesProvider>(
+        Consumer<BuscaFilmesViewModel>(
           builder: (_, buscaFilmesProvider, __) =>
               _renderizarConteudoPesquisa(buscaFilmesProvider),
         ),
@@ -100,7 +100,7 @@ class _PesquisaScreenState extends State<PesquisaScreen> {
     );
   }
 
-  Widget _renderizarConteudoPesquisa(BuscaFilmesProvider buscaFilmesProvider) {
+  Widget _renderizarConteudoPesquisa(BuscaFilmesViewModel buscaFilmesProvider) {
     if (buscaFilmesProvider.carregando && !_carregandoMaisFilmes) {
       return const CustomCircularProgressWidget();
     }

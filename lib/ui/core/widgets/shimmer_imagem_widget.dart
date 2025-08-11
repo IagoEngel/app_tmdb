@@ -1,4 +1,4 @@
-import 'package:app_tmdb/providers/configuracoes_provider.dart';
+import 'package:app_tmdb/view%20model/configuracoes_view_model.dart';
 import 'package:app_tmdb/ui/core/themes/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class ShimmerImagemWidget extends StatefulWidget {
 }
 
 class _ShimmerImagemWidgetState extends State<ShimmerImagemWidget> {
-  late ConfiguracoesProvider _configuracoesProvider;
+  late ConfiguracoesViewModel _configuracoesProvider;
 
   bool _carregandoImagem = true;
   String fullPath = '';

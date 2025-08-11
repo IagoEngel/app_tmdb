@@ -2,7 +2,7 @@ import 'package:app_tmdb/domain/models/filme_model.dart';
 import 'package:app_tmdb/repository/filme_repository.dart';
 import 'package:flutter/material.dart';
 
-class RecomendacoesProvider extends ChangeNotifier {
+class FilmesSimilaresViewModel extends ChangeNotifier {
   final FilmeRepository _filmeService = FilmeRepository();
 
   List<FilmeModel> _listaFilmes = [];
@@ -18,20 +18,19 @@ class RecomendacoesProvider extends ChangeNotifier {
     _resetError();
   }
 
-  
-  Future getRecomendacoes(int movieId) async {
+  Future getFilmesSimilares(int movieId) async {
     try {
       _resetError();
       _setCarregando(true);
 
-      final response = await _filmeService.getRecomendacoes(movieId);
+      final response = await _filmeService.getFilmesSimilares(movieId);
 
       for (var i = 0; i < (response['results'] as List).length; i++) {
         final item = FilmeModel.fromJson(response['results'][i]);
         _listaFilmes.add(item);
       }
     } catch (e) {
-      _setErro('Erro ao buscar reconmendações => $e');
+      _setErro('Erro ao buscar filmes similares => $e');
     } finally {
       _setCarregando(false);
     }

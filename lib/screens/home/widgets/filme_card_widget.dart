@@ -1,5 +1,5 @@
 import 'package:app_tmdb/domain/models/filme_model.dart';
-import 'package:app_tmdb/providers/filmes_provider.dart';
+import 'package:app_tmdb/view%20model/filmes_provider_view_model.dart';
 import 'package:app_tmdb/ui/core/widgets/shimmer_imagem_widget.dart';
 import 'package:app_tmdb/ui/core/themes/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
@@ -21,7 +21,7 @@ class FilmeCardWidget extends StatefulWidget {
 }
 
 class _FilmeCardWidgetState extends State<FilmeCardWidget> {
-  late FilmesProvider _filmesProvider;
+  late FilmesViewModel _filmesProvider;
 
   final double _tamanho8 = DimensoesApp.larguraProporcional(8);
   final double _tamanho10 = DimensoesApp.larguraProporcional(10);

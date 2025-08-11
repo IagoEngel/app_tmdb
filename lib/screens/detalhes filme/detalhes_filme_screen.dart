@@ -1,5 +1,5 @@
 import 'package:app_tmdb/domain/models/filme_model.dart';
-import 'package:app_tmdb/providers/filmes_provider.dart';
+import 'package:app_tmdb/view%20model/filmes_provider_view_model.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/widgets/elenco_filme_widget.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/widgets/filmes_similares_widget.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/widgets/recomendacoes_widget.dart';
@@ -24,7 +24,7 @@ class DetalhesFilmeScreen extends StatefulWidget {
 }
 
 class _DetalhesFilmeScreenState extends State<DetalhesFilmeScreen> {
-  late FilmesProvider _filmesProvider;
+  late FilmesViewModel _filmesProvider;
   late FilmeModel _filme;
 
   final double _tamanho8 = DimensoesApp.larguraProporcional(8);

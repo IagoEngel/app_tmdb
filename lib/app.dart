@@ -1,8 +1,8 @@
-import 'package:app_tmdb/providers/busca_filmes_provider.dart';
-import 'package:app_tmdb/providers/configuracoes_provider.dart';
-import 'package:app_tmdb/providers/filmes_provider.dart';
-import 'package:app_tmdb/providers/filmes_similares_provider.dart';
-import 'package:app_tmdb/providers/recomendacoes_provider.dart';
+import 'package:app_tmdb/view%20model/busca_filmes_view_model.dart';
+import 'package:app_tmdb/view%20model/configuracoes_view_model.dart';
+import 'package:app_tmdb/view%20model/filmes_provider_view_model.dart';
+import 'package:app_tmdb/view%20model/filmes_similares_view_model.dart';
+import 'package:app_tmdb/view%20model/recomendacoes_view_model.dart';
 import 'package:app_tmdb/screens/tela%20inicial/tela_inicial_screen.dart';
 import 'package:app_tmdb/ui/core/themes/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
@@ -18,13 +18,13 @@ class AppBase extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ConfiguracoesProvider()),
-        ChangeNotifierProvider(create: (_) => FilmesProvider()),
-        ChangeNotifierProvider(create: (_) => BuscaFilmesProvider()),
-        ChangeNotifierProvider(create: (_) => FilmesSimilaresProvider()),
-        ChangeNotifierProvider(create: (_) => RecomendacoesProvider()),
+        ChangeNotifierProvider(create: (_) => ConfiguracoesViewModel()),
+        ChangeNotifierProvider(create: (_) => FilmesViewModel()),
+        ChangeNotifierProvider(create: (_) => BuscaFilmesViewModel()),
+        ChangeNotifierProvider(create: (_) => FilmesSimilaresViewModel()),
+        ChangeNotifierProvider(create: (_) => RecomendacoesViewModel()),
       ],
-      child: Consumer<ConfiguracoesProvider>(
+      child: Consumer<ConfiguracoesViewModel>(
         child: const TelaInicial(),
         builder: (_, configuracoes, child) => MaterialApp(
           theme: configuracoes.temaClaro

@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ConfiguracoesProvider extends ChangeNotifier {
+class ConfiguracoesViewModel extends ChangeNotifier {
   final ConfiguracoesRepository _configuracoesService = ConfiguracoesRepository();
 
   ConfiguracoesModel? configuracoes;

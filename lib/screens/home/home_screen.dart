@@ -1,5 +1,5 @@
-import 'package:app_tmdb/providers/configuracoes_provider.dart';
-import 'package:app_tmdb/providers/filmes_provider.dart';
+import 'package:app_tmdb/view%20model/configuracoes_view_model.dart';
+import 'package:app_tmdb/view%20model/filmes_provider_view_model.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/detalhes_filme_screen.dart';
 import 'package:app_tmdb/screens/home/widgets/filme_card_widget.dart';
 import 'package:app_tmdb/ui/core/themes/app_tema.dart';
@@ -18,8 +18,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late ConfiguracoesProvider _configuracoesProvider;
-  late FilmesProvider _filmesProvider;
+  late ConfiguracoesViewModel _configuracoesProvider;
+  late FilmesViewModel _filmesProvider;
 
   final ScrollController _scrollController = ScrollController();
 
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 IconButton(
                   onPressed: () {
-                    ConfiguracoesProvider configuracoesProvider =
+                    ConfiguracoesViewModel configuracoesProvider =
                         Provider.of(context, listen: false);
                     configuracoesProvider.setTema();
                   },
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           const CustomSizedBoxWidget(height: 16),
-          Consumer2<ConfiguracoesProvider, FilmesProvider>(
+          Consumer2<ConfiguracoesViewModel, FilmesViewModel>(
             builder: (_, configuracoesAux, filmesAux, __) => _renderizarListaFilmes(configuracoesAux, filmesAux),
           ),
         ],
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Widget _renderizarListaFilmes(ConfiguracoesProvider configuracoesAux, FilmesProvider filmesAux) {
+  Widget _renderizarListaFilmes(ConfiguracoesViewModel configuracoesAux, FilmesViewModel filmesAux) {
     if (_carregando) {
       return const Expanded(
         child: CustomCircularProgressWidget(),

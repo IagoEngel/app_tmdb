@@ -1,4 +1,4 @@
-import 'package:app_tmdb/providers/configuracoes_provider.dart';
+import 'package:app_tmdb/view%20model/configuracoes_view_model.dart';
 import 'package:app_tmdb/ui/core/themes/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class FloatingNavigationBarWidget extends StatelessWidget {
     final double tamanho50 = DimensoesApp.larguraProporcional(50);
     final double tamanho60 = DimensoesApp.larguraProporcional(60);
 
-    return Consumer<ConfiguracoesProvider>(
+    return Consumer<ConfiguracoesViewModel>(
       builder: (context, _, __) => Container(
         height: DimensoesApp.larguraProporcional(58),
         width: DimensoesApp.larguraProporcional(130),

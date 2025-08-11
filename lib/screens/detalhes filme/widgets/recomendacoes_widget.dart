@@ -1,4 +1,4 @@
-import 'package:app_tmdb/providers/recomendacoes_provider.dart';
+import 'package:app_tmdb/view%20model/recomendacoes_view_model.dart';
 import 'package:app_tmdb/screens/detalhes%20filme/widgets/info_card_widget.dart';
 import 'package:app_tmdb/ui/core/widgets/custom_circular_progress_widget.dart';
 import 'package:app_tmdb/ui/core/widgets/custom_sized_box_widget.dart';
@@ -21,7 +21,7 @@ class RecomendacoesWidget extends StatefulWidget {
 }
 
 class _RecomendacoesWidgetState extends State<RecomendacoesWidget> {
-  late RecomendacoesProvider _recomendacoesProvider;
+  late RecomendacoesViewModel _recomendacoesProvider;
 
   @override
   void initState() {
@@ -50,14 +50,14 @@ class _RecomendacoesWidgetState extends State<RecomendacoesWidget> {
           'Recomendações: ',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
-        Consumer<RecomendacoesProvider>(
+        Consumer<RecomendacoesViewModel>(
           builder: (_, providerAux, __) => _renderizarConteudo(providerAux),
         ),
       ],
     );
   }
 
-  Widget _renderizarConteudo(RecomendacoesProvider providerAux) {
+  Widget _renderizarConteudo(RecomendacoesViewModel providerAux) {
     if (providerAux.carregando) {
       return const CustomCircularProgressWidget();
     }
