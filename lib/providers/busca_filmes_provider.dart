@@ -1,9 +1,9 @@
 import 'package:app_tmdb/models/filme_model.dart';
-import 'package:app_tmdb/services/filme_service.dart';
+import 'package:app_tmdb/repository/filme_repository.dart';
 import 'package:flutter/material.dart';
 
 class BuscaFilmesProvider extends ChangeNotifier {
-  final FilmeService _filmeService = FilmeService();
+  final FilmeRepository _filmeService = FilmeRepository();
 
   List<FilmeModel> _listaFilmesBuscados = [];
   List<FilmeModel> get listaFilmesBuscados => _listaFilmesBuscados;

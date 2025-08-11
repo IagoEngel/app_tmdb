@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-abstract class CustomDio {
+abstract class CustomDioRepository {
   static Dio get baseDio => Dio(
         BaseOptions(
           baseUrl: 'https://api.themoviedb.org/3',

@@ -1,8 +1,8 @@
-import 'package:app_tmdb/services/custom_dio.dart';
+import 'package:app_tmdb/repository/custom_dio_repository.dart';
 import 'package:dio/dio.dart';
 
-class ConfiguracoesService {
-  final Dio _dio = CustomDio.baseDio;
+class ConfiguracoesRepository {
+  final Dio _dio = CustomDioRepository.baseDio;
 
   Future getConfiguracoes() async {
     try {

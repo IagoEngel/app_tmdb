@@ -1,10 +1,10 @@
 import 'package:app_tmdb/models/filme_model.dart';
 import 'package:app_tmdb/models/membro_elenco_model.dart';
-import 'package:app_tmdb/services/filme_service.dart';
+import 'package:app_tmdb/repository/filme_repository.dart';
 import 'package:flutter/material.dart';
 
 class FilmesProvider extends ChangeNotifier {
-  final FilmeService _filmeService = FilmeService();
+  final FilmeRepository _filmeService = FilmeRepository();
 
   List<FilmeModel> _listaFilmes = [];
   List<FilmeModel> get listaFilmes => _listaFilmes;

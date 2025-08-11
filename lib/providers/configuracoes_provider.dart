@@ -1,11 +1,11 @@
 import 'package:app_tmdb/models/configuracoes_model.dart';
-import 'package:app_tmdb/services/configuracoes_service.dart';
+import 'package:app_tmdb/repository/configuracoes_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfiguracoesProvider extends ChangeNotifier {
-  final ConfiguracoesService _configuracoesService = ConfiguracoesService();
+  final ConfiguracoesRepository _configuracoesService = ConfiguracoesRepository();
 
   ConfiguracoesModel? configuracoes;
 
