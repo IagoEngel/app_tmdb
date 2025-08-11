@@ -19,6 +19,10 @@ class BuscaFilmesProvider extends ChangeNotifier {
       _resetError();
       _setCarregando(true);
 
+      if (query.isEmpty) {
+        return;
+      }
+
       if (page == 1 && _listaFilmesBuscados.isNotEmpty) {
         _listaFilmesBuscados = [];
       }

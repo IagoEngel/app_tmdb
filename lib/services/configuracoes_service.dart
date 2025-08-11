@@ -10,7 +10,8 @@ class ConfiguracoesService {
 
       return response.data;
     } catch (e) {
-      rethrow;
+      String error = e is DioException ? e.message ?? '' : e.toString();
+      throw Exception(error);
     }
   }
 }

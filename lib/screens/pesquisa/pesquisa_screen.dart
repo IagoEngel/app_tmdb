@@ -111,6 +111,19 @@ class _PesquisaScreenState extends State<PesquisaScreen> {
             builder: (context) =>
                 PopupErroWidget(mensagem: buscaFilmesProvider.mensagemErro),
           ));
+
+      return Expanded(
+        child: Center(
+          child: OutlinedButton(
+            onPressed: () => _buscaFilmesProvider.buscarFilmes(
+              1,
+              _controller.text.trim(),
+              generoId: (generosFilme.entries.toList())[_generoSelecionado].key,
+            ),
+            child: const Text('Tentar novamente'),
+          ),
+        ),
+      );
     }
 
     if (buscaFilmesProvider.totalPages != null &&

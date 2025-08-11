@@ -15,7 +15,8 @@ class FilmeService {
 
       return response.data;
     } catch (e) {
-      rethrow;
+      String error = e is DioException ? e.message ?? '' : e.toString();
+      throw Exception(error);
     }
   }
 
@@ -25,7 +26,8 @@ class FilmeService {
 
       return List.from(response.data['genres']);
     } catch (e) {
-      rethrow;
+      String error = e is DioException ? e.message ?? '' : e.toString();
+      throw Exception(error);
     }
   }
 
@@ -41,7 +43,8 @@ class FilmeService {
 
       return response.data;
     } catch (e) {
-      rethrow;
+      String error = e is DioException ? e.message ?? '' : e.toString();
+      throw Exception(error);
     }
   }
 
@@ -51,7 +54,8 @@ class FilmeService {
 
       return response.data;
     } catch (e) {
-      rethrow;
+      String error = e is DioException ? e.message ?? '' : e.toString();
+      throw Exception(error);
     }
   }
 
@@ -61,7 +65,8 @@ class FilmeService {
 
       return response.data;
     } catch (e) {
-      rethrow;
+      String error = e is DioException ? e.message ?? '' : e.toString();
+      throw Exception(error);
     }
   }
 
@@ -71,7 +76,8 @@ class FilmeService {
 
       return response.data;
     } catch (e) {
-      rethrow;
+      String error = e is DioException ? e.message ?? '' : e.toString();
+      throw Exception(error);
     }
   }
 
@@ -81,7 +87,8 @@ class FilmeService {
 
       return response.data;
     } catch (e) {
-      rethrow;
+      String error = e is DioException ? e.message ?? '' : e.toString();
+      throw Exception(error);
     }
   }
 }

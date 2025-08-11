@@ -28,6 +28,11 @@ abstract class AppTema {
         border: _outlinedBorderComum(borderColor: borda),
         focusedBorder: _outlinedBorderComum(borderColor: destaque),
       ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: WidgetStatePropertyAll(corIcone),
+        ),
+      ),
       chipTheme: ChipThemeData(
         backgroundColor: cinza,
         side: BorderSide.none,
@@ -76,6 +81,11 @@ abstract class AppTema {
         fillColor: cinza,
         border: _outlinedBorderComum(borderColor: borda),
         focusedBorder: _outlinedBorderComum(borderColor: destaque),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: WidgetStatePropertyAll(corIcone),
+        ),
       ),
       chipTheme: ChipThemeData(
         backgroundColor: cinza,

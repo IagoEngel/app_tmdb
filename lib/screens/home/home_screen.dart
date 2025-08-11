@@ -6,6 +6,7 @@ import 'package:app_tmdb/utils/app_tema.dart';
 import 'package:app_tmdb/utils/dimensoes_app.dart';
 import 'package:app_tmdb/utils/widgets/custom_circular_progress_widget.dart';
 import 'package:app_tmdb/utils/widgets/custom_sized_box_widget.dart';
+import 'package:app_tmdb/utils/widgets/popup_erro_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -87,7 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 IconButton(
                   onPressed: () {
-                    ConfiguracoesProvider configuracoesProvider = Provider.of(context, listen: false);
+                    ConfiguracoesProvider configuracoesProvider =
+                        Provider.of(context, listen: false);
                     configuracoesProvider.setTema();
                   },
                   visualDensity: VisualDensity.compact,
@@ -98,7 +100,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           const CustomSizedBoxWidget(height: 16),
-          _renderizarListaFilmes(),
+          Consumer2<ConfiguracoesProvider, FilmesProvider>(
+            builder: (_, configuracoesAux, filmesAux, __) => _renderizarListaFilmes(configuracoesAux, filmesAux),
+          ),
         ],
       ),
     );
@@ -115,10 +119,33 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Widget _renderizarListaFilmes() {
+  Widget _renderizarListaFilmes(ConfiguracoesProvider configuracoesAux, FilmesProvider filmesAux) {
     if (_carregando) {
       return const Expanded(
         child: CustomCircularProgressWidget(),
+      );
+    }
+
+    if (_configuracoesProvider.temErro || _filmesProvider.temErro) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        String mensagemErro = _configuracoesProvider.mensagemErro.isNotEmpty
+            ? '${_configuracoesProvider.mensagemErro}\n'
+            : '';
+        mensagemErro += _filmesProvider.mensagemErro;
+
+        showDialog(
+          context: context,
+          builder: (context) => PopupErroWidget(mensagem: mensagemErro),
+        );
+      });
+
+      return Expanded(
+        child: Center(
+          child: OutlinedButton(
+            onPressed: inicializar,
+            child: const Text('Tentar novamente'),
+          ),
+        ),
       );
     }
 

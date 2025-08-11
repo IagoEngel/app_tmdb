@@ -34,12 +34,10 @@ class FilmesProvider extends ChangeNotifier {
         _listaFilmes.add(FilmeModel.fromJson(item));
       }
     } catch (e) {
-      _setErro(e.toString());
+      _setErro('Erro ao buscar filmes populares => $e');
     } finally {
       _setCarregando(false);
     }
-
-    notifyListeners();
   }
 
   Future getGenerosFilmes() async {
@@ -55,7 +53,7 @@ class FilmesProvider extends ChangeNotifier {
         _generosFilmes.putIfAbsent(item['id'], () => item['name']);
       }
     } catch (e) {
-      _setErro(e.toString());
+      _setErro('Erro ao buscar os gêneros de filmes => $e');
     } finally {
       _setCarregando(false);
     }
@@ -69,7 +67,7 @@ class FilmesProvider extends ChangeNotifier {
 
       return FilmeModel.fromJson(response);
     } catch (e) {
-      _setErro(e.toString());
+      _setErro('Erro ao buscar detalhes do filme => $e');
       rethrow;
     }
   }
@@ -88,15 +86,20 @@ class FilmesProvider extends ChangeNotifier {
 
       return (cast: cast, crew: crew);
     } catch (e) {
+      _setErro('Erro ao buscar elenco ou equipe do filme => $e');
       rethrow;
     }
   }
 
-  void _setCarregando(bool valor) => carregando = valor;
+  void _setCarregando(bool valor) {
+    carregando = valor;
+
+    notifyListeners();
+  }
 
   void _setErro(String mensagem) {
     temErro = true;
-    mensagemErro = mensagem;
+    mensagemErro += mensagem;
   }
 
   void _resetError() {

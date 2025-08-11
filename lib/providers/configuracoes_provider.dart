@@ -1,5 +1,6 @@
 import 'package:app_tmdb/models/configuracoes_model.dart';
 import 'package:app_tmdb/services/configuracoes_service.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,7 +24,11 @@ class ConfiguracoesProvider extends ChangeNotifier {
       final response = await _configuracoesService.getConfiguracoes();
       configuracoes = ConfiguracoesModel.fromJson(response);
     } catch (e) {
-      _setErro(e.toString());
+      String error = e is DioException ? e.message ?? '' : e.toString();
+      error = error.contains('Failed host lookup')
+          ? 'Erro de conexão: verifique sua conexão com a internet'
+          : error;
+      _setErro('Erro ao buscar configurações => $error');
     } finally {
       notifyListeners();
     }
